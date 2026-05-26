@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Low-Carbon Car Finder | Canberra First Jobbers</title>
+<style>
+:root{
+  --ink:#173b2b; --muted:#668071; --green:#2f7a45; --green2:#dcefd9; --blue:#dff1f7; --cream:#fbf6e9; --white:rgba(255,255,255,.78);
+  --shadow:0 18px 45px rgba(23,59,43,.10); --line:rgba(23,59,43,.12);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:
+radial-gradient(circle at 5% 4%, rgba(130,195,220,.38), transparent 28%),
+radial-gradient(circle at 95% 8%, rgba(113,180,131,.34), transparent 26%),
+radial-gradient(circle at 50% 100%, rgba(239,202,135,.32), transparent 34%),var(--cream)}
+button,input,select{font:inherit}
+.app{max-width:1220px;margin:auto;padding:20px}
+.hero{display:grid;grid-template-columns:1.3fr .9fr;gap:18px;align-items:stretch;margin-bottom:18px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:30px;box-shadow:var(--shadow);backdrop-filter:blur(8px)}
+.hero-main{padding:28px}
+.badge{display:inline-flex;gap:8px;align-items:center;background:var(--green2);color:#24563d;border-radius:999px;padding:8px 13px;font-weight:800;font-size:13px}
+h1{font-size:48px;line-height:1.02;margin:13px 0 12px;letter-spacing:-1.5px}
+.lead{font-size:17px;line-height:1.6;color:rgba(23,59,43,.72);max-width:750px}
+.hero-side{padding:20px;background:linear-gradient(135deg,rgba(220,239,217,.84),rgba(223,241,247,.9))}
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.metric{background:rgba(255,255,255,.7);border-radius:22px;padding:14px;text-align:center}
+.metric b{display:block;font-size:20px}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 18px}
+.tab{border:1px solid var(--line);background:rgba(255,255,255,.75);border-radius:999px;padding:11px 15px;cursor:pointer;font-weight:800;color:var(--ink)}
+.tab.active{background:var(--green);color:white;border-color:var(--green)}
+.screen{display:none}.screen.active{display:block}
+.grid{display:grid;gap:18px}.two{grid-template-columns:360px 1fr}.three{grid-template-columns:repeat(3,1fr)}
+.panel{padding:22px}
+.phone{background:#fffdf7;border:1px solid rgba(23,59,43,.22);border-radius:36px;box-shadow:0 24px 60px rgba(23,59,43,.18);max-width:330px;margin:auto;min-height:650px;padding:18px;display:flex;flex-direction:column}
+.notch{width:76px;height:22px;border-radius:999px;background:rgba(23,59,43,.1);margin:0 auto 14px}
+.progress-info{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;font-weight:800}
+.bar{height:9px;border-radius:999px;background:#e4f2de;overflow:hidden;margin:8px 0 20px}.fill{height:100%;background:var(--green);transition:.25s}
+.qhead{display:flex;gap:11px;align-items:center;margin-bottom:9px}.qicon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:#e8f4e5;border-radius:17px;font-size:22px}.qtitle{font-size:19px;font-weight:900;line-height:1.15}.qsub{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:14px}
+.opts{display:grid;gap:9px}.opt{border:1px solid var(--line);border-radius:17px;background:white;padding:12px 13px;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center}.opt:hover{background:#f2f8ef}.opt.sel{background:var(--green2);border-color:var(--green);font-weight:900}.nav{margin-top:auto;display:flex;gap:10px;padding-top:18px}.btn{border:1px solid var(--line);background:white;border-radius:16px;padding:12px 14px;cursor:pointer;font-weight:900;color:var(--ink)}.btn.primary{background:var(--green);color:white;border-color:var(--green)}.btn.full{width:100%}.btn:disabled{opacity:.45;cursor:not-allowed}
+h2{margin:0 0 6px;font-size:28px;letter-spacing:-.5px}.desc{margin:0 0 16px;color:var(--muted);line-height:1.5}
+.result-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:16px}.best{background:linear-gradient(135deg,#dcefd9,#dff1f7);border-radius:26px;padding:22px}.emoji{font-size:54px}.label{color:var(--green);font-weight:900;margin:6px 0}.best h3{font-size:31px;margin:0}.small{font-size:13px;color:var(--muted);line-height:1.45}.reasons{display:grid;gap:8px;margin:16px 0;font-size:14px;line-height:1.45}
+.table{overflow:hidden;border-radius:23px;border:1px solid var(--line);background:white}.row{display:grid;grid-template-columns:1.3fr .95fr .8fr .95fr;border-top:1px solid var(--line);font-size:12px}.row:first-child{border-top:0}.row.head{background:#e8f4e5;font-weight:900}.cell{padding:12px}.toprow{background:#f1f8ef}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}.kpi{background:white;border-radius:18px;padding:12px;border:1px solid var(--line)}.kpi b{display:block;font-size:19px}
+.car-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.car{background:white;border:1px solid var(--line);border-radius:25px;padding:16px}.car h3{margin:8px 0 3px;font-size:18px}.tagwrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.tag{background:#e8f4e5;color:#255b40;border-radius:999px;padding:6px 8px;font-size:11px;font-weight:800}
+.filterbar{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:10px;margin-bottom:14px}.field{border:1px solid var(--line);border-radius:15px;padding:11px;background:white;color:var(--ink)}
+.compare-box{display:grid;grid-template-columns:1fr 1fr;gap:16px}.compare-card{background:white;border:1px solid var(--line);border-radius:24px;padding:16px}.statbar{height:10px;background:#e6eee7;border-radius:999px;overflow:hidden}.statbar span{display:block;height:100%;background:var(--green)}
+.sources{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.source{background:white;border-radius:22px;padding:16px}.source b{color:var(--green)}
+.warning{background:#fff5d8;color:#69511e;border-radius:18px;padding:13px;font-size:12px;line-height:1.5;margin-top:14px}
+@media(max-width:980px){.hero,.two,.result-grid,.compare-box{grid-template-columns:1fr}.three,.car-grid,.sources,.kpis,.filterbar{grid-template-columns:1fr}h1{font-size:35px}.app{padding:14px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <section class="hero">
+    <div class="card hero-main">
+      <div class="badge">🌿 SDG 13 • Canberra First Jobbers</div>
+      <h1>Low-Carbon Car Finder</h1>
+      <p class="lead">A more usable prototype: answer car-buying questions, get a ranked recommendation, compare real-style vehicle options, estimate 5-year ownership cost, and save a shortlist.</p>
+      <div class="tabs">
+        <button class="tab active" data-tab="quiz">1. Find My Car</button>
+        <button class="tab" data-tab="results">2. Results</button>
+        <button class="tab" data-tab="database">3. Car Database</button>
+        <button class="tab" data-tab="compare">4. Compare</button>
+        <button class="tab" data-tab="saved">5. Saved</button>
+      </div>
+    </div>
+    <div class="card hero-side">
+      <b>What makes this version feel more real?</b>
+      <div class="metric-grid">
+        <div class="metric">🚗<b>9</b><span class="small">sample cars</span></div>
+        <div class="metric">🧮<b>Cost</b><span class="small">5-year estimate</span></div>
+        <div class="metric">🔖<b>Save</b><span class="small">shortlist</span></div>
+      </div>
+      <p class="small" style="margin-top:12px">Static HTML prototype. It does not scrape live listings, but it behaves like a working product demo.</p>
+    </div>
+  </section>
+
+  <section id="quiz" class="screen active">
+    <div class="grid two">
+      <div class="card panel">
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="progress-info"><span id="stepCount"></span><span id="progressText"></span></div>
+          <div class="bar"><div id="progressFill" class="fill"></div></div>
+          <div id="questionArea"></div>
+          <div class="nav"><button class="btn" id="backBtn">Back</button><button class="btn primary" id="nextBtn">Next</button></div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card panel">
+          <h2>Live Preview</h2>
+          <p class="desc">The recommendation updates immediately as the user changes answers.</p>
+          <div id="livePreview"></div>
+        </div>
+        <div class="card panel">
+          <h2>User Profile Summary</h2>
+          <div id="profileSummary" class="car-grid"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="results" class="screen">
+    <div class="card panel">
+      <h2>Your Recommendation</h2>
+      <p class="desc">Ranked by budget, driving experience, seat needs, car size, charging access, ownership preference and priorities.</p>
+      <div class="result-grid">
+        <div class="best">
+          <div id="bestEmoji" class="emoji"></div><div class="label">Best Match</div><h3 id="bestName"></h3><p id="bestExample" class="small"></p>
+          <div id="bestReasons" class="reasons"></div>
+          <button class="btn primary" onclick="saveBest()">Save this option</button>
+        </div>
+        <div id="comparisonTable" class="table"></div>
+      </div>
+      <div id="costKPIs" class="kpis"></div>
+    </div>
+  </section>
+
+  <section id="database" class="screen">
+    <div class="card panel">
+      <h2>Car Database</h2>
+      <p class="desc">A prototype database with Australian-market examples. Use filters to make it feel like a real app search.</p>
+      <div class="filterbar">
+        <input id="searchInput" class="field" placeholder="Search model, brand, type..." />
+        <select id="typeFilter" class="field"><option value="">All types</option><option>EV</option><option>Hybrid</option><option>Petrol</option><option>Diesel</option></select>
+        <select id="seatFilter" class="field"><option value="">Any seats</option><option value="5">4–5 seats</option><option value="7">6–7 seats</option></select>
+        <select id="ownFilter" class="field"><option value="">New or used</option><option value="used">Second-hand</option><option value="new">New</option></select>
+        <button class="btn primary" onclick="renderDatabase()">Apply</button>
+      </div>
+      <div id="databaseGrid" class="car-grid"></div>
+    </div>
+  </section>
+
+  <section id="compare" class="screen">
+    <div class="card panel">
+      <h2>Compare Two Cars</h2>
+      <p class="desc">Select two models to compare price, running cost, emissions and suitability.</p>
+      <div class="filterbar" style="grid-template-columns:1fr 1fr auto">
+        <select id="compareA" class="field"></select>
+        <select id="compareB" class="field"></select>
+        <button class="btn primary" onclick="renderCompare()">Compare</button>
+      </div>
+      <div id="compareOutput" class="compare-box"></div>
+    </div>
+  </section>
+
+  <section id="saved" class="screen">
+    <div class="card panel">
+      <h2>Saved Shortlist</h2>
+      <p class="desc">Saved cars are stored in this browser using localStorage.</p>
+      <div id="savedGrid" class="car-grid"></div>
+      <button class="btn" onclick="clearSaved()" style="margin-top:14px">Clear saved cars</button>
+    </div>
+  </section>
+
+  <section class="card panel" style="margin-top:18px">
+    <h2>Evidence Notes for Report</h2>
+    <div class="sources">
+      <div class="source"><b>Green Vehicle Guide</b><p class="small">Australia’s official guide helps users compare fuel use, CO₂ emissions, running costs and lifecycle emissions.</p></div>
+      <div class="source"><b>ACT ZEV incentives</b><p class="small">ACT provides incentives such as low-interest loans for eligible ZEVs and charging infrastructure.</p></div>
+      <div class="source"><b>2025 market trend</b><p class="small">Hybrid and PHEV sales increased in Australia, supporting the need to compare more than only EVs.</p></div>
+    </div>
+    <div class="warning">Prototype note: prices, annual cost and emissions values are simplified classroom estimates, not financial advice. A production version should connect to live listing data and the official Green Vehicle Guide vehicle API/data.</div>
+  </section>
+</div>
+
+<script>
+const questions=[
+{id:"budget",icon:"💰",title:"What is your total car budget?",sub:"Include purchase price, registration, insurance and first service.",type:"single",opts:[["Under $15,000","under15"],["$15,000–$30,000","15to30"],["Over $30,000","over30"],["Not sure","unsure"]]},
+{id:"experience",icon:"🚗",title:"Have you driven a car before?",sub:"This helps avoid recommending a car that feels too big or difficult.",type:"single",opts:[["I drive regularly","regular"],["Sometimes","sometimes"],["Licence but rarely drive","rarely"],["New driver","new"]]},
+{id:"previousCar",icon:"🚙",title:"What type of car have you driven before?",sub:"Small hatchback, sedan, SUV, ute or large vehicle.",type:"single",opts:[["Small car / hatchback","small"],["Sedan","sedan"],["SUV","suv"],["Ute / large vehicle","large"],["I have not driven before","none"]]},
+{id:"seats",icon:"👥",title:"How many seats do you need?",sub:"Think about daily use, friends, family and weekend travel.",type:"single",opts:[["2 seats","2"],["4–5 seats","5"],["6–7 seats","7"],["More than 7 seats","8plus"]]},
+{id:"size",icon:"📏",title:"What car size do you prefer?",sub:"Small MG 3 style cars are easier to park; MU-X style SUVs give more space.",type:"single",opts:[["Small car","small"],["Medium car","medium"],["Large SUV","large"],["Not sure","unsure"]]},
+{id:"mainUse",icon:"💼",title:"What will you mainly use the car for?",sub:"Choose the closest option to your normal lifestyle.",type:"single",opts:[["Commuting to work","work"],["Groceries and errands","errands"],["Weekend trips","weekend"],["Long-distance travel","long"],["Family use","family"],["Delivery / part-time work","delivery"]]},
+{id:"weeklyDriving",icon:"🛣️",title:"How much do you drive each week?",sub:"More driving makes running cost and emissions more important.",type:"single",opts:[["Under 50 km","under50"],["50–150 km","50to150"],["150–300 km","150to300"],["Over 300 km","over300"]]},
+{id:"charging",icon:"🔌",title:"Do you have access to EV charging?",sub:"This affects whether an EV is realistic for daily life.",type:"single",opts:[["Home charging","home"],["Workplace charging","work"],["Public charging only","public"],["No access","none"],["Not sure","unsure"]]},
+{id:"ownership",icon:"🛒",title:"New or second-hand car?",sub:"Second-hand cars can be more affordable for first jobbers.",type:"single",opts:[["New car","new"],["Second-hand car","used"],["Open to both","both"],["Help me decide","help"]]},
+{id:"resale",icon:"🔁",title:"How long do you plan to keep it?",sub:"Resale matters if you plan to sell in a few years.",type:"single",opts:[["1–3 years","1to3"],["4–6 years","4to6"],["7–10 years","7to10"],["More than 10 years","10plus"],["Not sure","unsure"]]},
+{id:"priorities",icon:"✅",title:"Choose your top 2 priorities",sub:"The app ranks options around what matters most to you.",type:"multi",max:2,opts:[["Lower purchase price","purchase"],["Lower running cost","running"],["Lower emissions","emissions"],["Convenience","convenience"],["Safety","safety"],["Resale value","resale"],["Easy maintenance","maintenance"]]}
+];
+
+const cars=[
+{id:"mg3",name:"MG 3",example:"Used petrol hatchback",type:"Petrol",ownership:"used",seats:5,size:"small",price:14000,annualCost:2600,co2:150,emoji:"🚗",tags:["Lowest upfront cost","Easy to park","Higher emissions"]},
+{id:"corollaH",name:"Toyota Corolla Hybrid",example:"Used hybrid hatch/sedan",type:"Hybrid",ownership:"used",seats:5,size:"medium",price:24000,annualCost:1500,co2:90,emoji:"🍃",tags:["Reliable","Low fuel cost","Good first-jobber fit"]},
+{id:"prius",name:"Toyota Prius",example:"Used hybrid",type:"Hybrid",ownership:"used",seats:5,size:"medium",price:19000,annualCost:1450,co2:85,emoji:"🍃",tags:["Efficient","Used market option","No charging needed"]},
+{id:"mgzs",name:"MG ZS EV",example:"Used electric small SUV",type:"EV",ownership:"used",seats:5,size:"medium",price:27000,annualCost:950,co2:0,emoji:"⚡",tags:["Low running cost","EV option","Needs charging"]},
+{id:"bydDolphin",name:"BYD Dolphin",example:"New compact EV",type:"EV",ownership:"new",seats:5,size:"small",price:39000,annualCost:850,co2:0,emoji:"⚡",tags:["New EV","Compact","Higher upfront cost"]},
+{id:"tesla3",name:"Tesla Model 3",example:"Used EV sedan",type:"EV",ownership:"used",seats:5,size:"medium",price:39000,annualCost:900,co2:0,emoji:"⚡",tags:["Longer range","Low running cost","Higher price"]},
+{id:"yarisCrossH",name:"Toyota Yaris Cross Hybrid",example:"New hybrid small SUV",type:"Hybrid",ownership:"new",seats:5,size:"medium",price:36000,annualCost:1400,co2:85,emoji:"🍃",tags:["New warranty","Efficient","Small SUV"]},
+{id:"mux",name:"Isuzu MU-X",example:"Used 7-seat diesel SUV",type:"Diesel",ownership:"used",seats:7,size:"large",price:42000,annualCost:3600,co2:220,emoji:"🚙",tags:["7 seats","Long-distance practical","High emissions"]},
+{id:"klugerH",name:"Toyota Kluger Hybrid",example:"Used 7-seat hybrid SUV",type:"Hybrid",ownership:"used",seats:7,size:"large",price:52000,annualCost:2200,co2:130,emoji:"🚙",tags:["7 seats","Hybrid SUV","High upfront cost"]}
+];
+
+let step=0;
+let answers={budget:"15to30",experience:"new",previousCar:"small",seats:"5",size:"small",mainUse:"work",weeklyDriving:"50to150",charging:"none",ownership:"used",resale:"7to10",priorities:["purchase","running"]};
+
+function kmMultiplier(){return {under50:.6,"50to150":1,"150to300":1.5,over300:2.2}[answers.weeklyDriving]||1}
+function score(car){
+ let s=0, reasons=[];
+ if(answers.budget==="under15"){ if(car.price<=16000){s+=7;reasons.push("fits a strict low budget")} else s-=Math.floor((car.price-15000)/5000)}
+ if(answers.budget==="15to30"){ if(car.price>=15000&&car.price<=30000){s+=7;reasons.push("fits the $15k–$30k budget")} if(car.price>35000)s-=3}
+ if(answers.budget==="over30"){ if(car.price>28000)s+=3; }
+ if(["new","rarely"].includes(answers.experience)){ if(car.size==="small"||car.size==="medium"){s+=4;reasons.push("suitable for a new or less confident driver")} if(car.size==="large")s-=4}
+ if(answers.seats==="7"||answers.seats==="8plus"||answers.size==="large"||answers.mainUse==="family"){ if(car.seats>=7){s+=8;reasons.push("matches the need for more seats and space")} else s-=4 } else { if(car.seats===5)s+=3; if(car.size==="large")s-=2}
+ if(["home","work"].includes(answers.charging)){ if(car.type==="EV"){s+=7;reasons.push("charging access makes an EV practical")} }
+ if(["none","public","unsure"].includes(answers.charging)){ if(car.type==="Hybrid"){s+=5;reasons.push("lower emissions without relying on EV charging")} if(car.type==="EV")s-=4}
+ if(answers.ownership==="used"&&car.ownership==="used"){s+=3;reasons.push("matches your second-hand preference")}
+ if(answers.ownership==="new"&&car.ownership==="new"){s+=3;reasons.push("matches your new-car preference")}
+ if(answers.mainUse==="long"||answers.weeklyDriving==="over300"){ if(car.type==="Hybrid"){s+=3;reasons.push("practical for longer trips without charging planning")} if(car.type==="EV"&&["home","work"].includes(answers.charging))s+=3; if(car.type==="Petrol"||car.type==="Diesel")s-=2}
+ const p=answers.priorities||[];
+ if(p.includes("purchase")){ if(car.price<25000)s+=4; if(car.price>40000)s-=2}
+ if(p.includes("running")){ if(car.annualCost<1600)s+=4; if(car.annualCost>2800)s-=3}
+ if(p.includes("emissions")){ if(car.co2===0)s+=6; else if(car.co2<100)s+=4; else if(car.co2>180)s-=4}
+ if(p.includes("convenience")){ if(car.type==="Hybrid"||car.type==="Petrol"||car.type==="Diesel")s+=2}
+ if(p.includes("maintenance")){ if(car.size!=="large")s+=2}
+ if(p.includes("safety")){ if(car.size==="medium"||car.size==="large")s+=1}
+ if(p.includes("resale")){ if(car.name.includes("Toyota")||car.type==="EV")s+=2}
+ return {...car,score:s,reasons:[...new Set(reasons)].slice(0,4),fiveYear:Math.round(car.price+(car.annualCost*kmMultiplier()*5)),annual:Math.round(car.annualCost*kmMultiplier())}
+}
+function results(){return cars.map(score).sort((a,b)=>b.score-a.score)}
+
+function showTab(id){
+ document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));
+ document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelector(`[data-tab="${id}"]`).classList.add("active");
+ if(id==="results")renderResults(); if(id==="database")renderDatabase(); if(id==="compare")renderCompare(); if(id==="saved")renderSaved();
+}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>showTab(t.dataset.tab));
+
+function renderQuestion(){
+ const q=questions[step], prog=Math.round(((step+1)/questions.length)*100);
+ stepCount.textContent=`${step+1}/${questions.length}`; progressText.textContent=`${prog}%`; progressFill.style.width=prog+"%"; backBtn.disabled=step===0; nextBtn.textContent=step===questions.length-1?"See Results":"Next";
+ questionArea.innerHTML=`<div class="qhead"><div class="qicon">${q.icon}</div><div class="qtitle">${q.title}</div></div><div class="qsub">${q.sub}</div><div class="opts">${q.opts.map(([lab,val])=>{const sel=q.type==="multi"?(answers[q.id]||[]).includes(val):answers[q.id]===val;return `<button class="opt ${sel?'sel':''}" onclick="selectOpt('${q.id}','${val}')"><span>${lab}</span><span>${sel?'✓':''}</span></button>`}).join("")}</div>`;
+ renderLive();
+}
+function selectOpt(id,val){
+ const q=questions.find(x=>x.id===id);
+ if(q.type==="multi"){let arr=answers[id]||[]; if(arr.includes(val))arr=arr.filter(x=>x!==val); else{ if(arr.length>=q.max)arr=arr.slice(1); arr.push(val)} answers[id]=arr}
+ else answers[id]=val;
+ renderQuestion();
+}
+backBtn.onclick=()=>{step=Math.max(0,step-1);renderQuestion()}
+nextBtn.onclick=()=>{ if(step===questions.length-1){showTab("results")} else {step++;renderQuestion()} }
+
+function cardHTML(car,withButton=true){
+ return `<div class="car"><div class="emoji">${car.emoji}</div><h3>${car.name}</h3><div class="small">${car.example}</div><p><b>Type:</b> ${car.type} • ${car.seats} seats</p><p><b>Est. price:</b> $${car.price.toLocaleString()}</p><p><b>Annual running:</b> ~$${car.annual.toLocaleString?car.annual.toLocaleString():car.annual}</p><p><b>CO₂:</b> ${car.co2===0?'0 tailpipe':car.co2+' g/km'}</p><div class="tagwrap">${car.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>${withButton?`<button class="btn full" style="margin-top:12px" onclick="saveCar('${car.id}')">Save</button>`:""}</div>`
+}
+function renderLive(){
+ const r=results(), b=r[0];
+ livePreview.innerHTML=`<div class="best"><div class="emoji">${b.emoji}</div><div class="label">Current best match</div><h3>${b.name}</h3><p class="small">${b.example}</p><div class="reasons">${(b.reasons.length?b.reasons:["Balanced option based on current answers"]).map(x=>`<div>✅ ${x}</div>`).join("")}</div></div>`;
+ profileSummary.innerHTML=[
+  ["Budget",answers.budget],["Seats",answers.seats],["Size",answers.size],["Charging",answers.charging],["Ownership",answers.ownership],["Priorities",(answers.priorities||[]).join(", ")]
+ ].map(([a,b])=>`<div class="car"><b>${a}</b><p class="small">${b}</p></div>`).join("");
+}
+function renderResults(){
+ const r=results(), b=r[0];
+ bestEmoji.textContent=b.emoji; bestName.textContent=b.name; bestExample.textContent="Example: "+b.example;
+ bestReasons.innerHTML=(b.reasons.length?b.reasons:["This option balances your selected needs."]).map(x=>`<div>✅ ${x}</div>`).join("");
+ comparisonTable.innerHTML=`<div class="row head"><div class="cell">Option</div><div class="cell">Est. price</div><div class="cell">Annual cost</div><div class="cell">CO₂</div></div>`+r.map((c,i)=>`<div class="row ${i===0?'toprow':''}"><div class="cell"><b>${c.name}</b><br><span class="small">Score ${c.score}</span></div><div class="cell">$${c.price.toLocaleString()}</div><div class="cell">~$${c.annual.toLocaleString()}</div><div class="cell">${c.co2===0?'0 tailpipe':c.co2+' g/km'}</div></div>`).join("");
+ costKPIs.innerHTML=`<div class="kpi"><span class="small">Best price</span><b>$${b.price.toLocaleString()}</b></div><div class="kpi"><span class="small">Annual running</span><b>~$${b.annual.toLocaleString()}</b></div><div class="kpi"><span class="small">5-year estimate</span><b>~$${b.fiveYear.toLocaleString()}</b></div><div class="kpi"><span class="small">Tailpipe CO₂</span><b>${b.co2===0?'0':b.co2+' g/km'}</b></div>`;
+}
+function renderDatabase(){
+ const search=(searchInput.value||"").toLowerCase(), type=typeFilter.value, seat=seatFilter.value, own=ownFilter.value;
+ const list=cars.map(score).filter(c=>(!search||(c.name+c.example+c.type).toLowerCase().includes(search))&&(!type||c.type===type)&&(!seat||(seat==="7"?c.seats>=7:c.seats<=5))&&(!own||c.ownership===own));
+ databaseGrid.innerHTML=list.map(c=>cardHTML(c)).join("")||"<p>No matching cars found.</p>";
+}
+[searchInput,typeFilter,seatFilter,ownFilter].forEach(el=>el&&el.addEventListener("input",renderDatabase));
+function setupCompare(){
+ compareA.innerHTML=cars.map(c=>`<option value="${c.id}">${c.name}</option>`).join("");
+ compareB.innerHTML=cars.map(c=>`<option value="${c.id}">${c.name}</option>`).join("");
+ compareB.value="mux";
+}
+function compareCard(c){
+ const maxPrice=55000, maxCost=4000, maxCO2=230;
+ return `<div class="compare-card"><div class="emoji">${c.emoji}</div><h3>${c.name}</h3><p class="small">${c.example}</p><p><b>Price:</b> $${c.price.toLocaleString()}</p><div class="statbar"><span style="width:${Math.round(c.price/maxPrice*100)}%"></span></div><p><b>Annual running:</b> ~$${c.annual.toLocaleString()}</p><div class="statbar"><span style="width:${Math.round(c.annual/maxCost*100)}%"></span></div><p><b>CO₂:</b> ${c.co2===0?'0 tailpipe':c.co2+' g/km'}</p><div class="statbar"><span style="width:${Math.max(4,Math.round(c.co2/maxCO2*100))}%"></span></div><div class="tagwrap">${c.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div><button class="btn full" style="margin-top:12px" onclick="saveCar('${c.id}')">Save</button></div>`
+}
+function renderCompare(){
+ const a=score(cars.find(c=>c.id===compareA.value)||cars[0]), b=score(cars.find(c=>c.id===compareB.value)||cars[1]);
+ compareOutput.innerHTML=compareCard(a)+compareCard(b);
+}
+function saveCar(id){ const saved=JSON.parse(localStorage.getItem("savedCars")||"[]"); if(!saved.includes(id))saved.push(id); localStorage.setItem("savedCars",JSON.stringify(saved)); alert("Saved to shortlist"); renderSaved(); }
+function saveBest(){saveCar(results()[0].id)}
+function renderSaved(){ const saved=JSON.parse(localStorage.getItem("savedCars")||"[]"); const list=cars.filter(c=>saved.includes(c.id)).map(score); savedGrid.innerHTML=list.length?list.map(c=>cardHTML(c,false)).join(""):"<p class='desc'>No saved cars yet. Save cars from Results, Database or Compare.</p>";}
+function clearSaved(){localStorage.removeItem("savedCars");renderSaved()}
+setupCompare(); renderQuestion(); renderDatabase(); renderCompare(); renderSaved();
+</script>
+</body>
+</html>
